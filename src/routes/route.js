@@ -1,6 +1,6 @@
 const express = require('express');
 const myHelper = require('../util/helper')
-const underscore = require('underscore')
+//const underscore = require('underscore')
 
 const router = express.Router();
 
@@ -20,15 +20,16 @@ router.get('/hello', function (req, res) {
 
 //-------Movies-1--------
 router.get('/movies', function (req, res) {
-    const movies=['Rang de basanti', 'The shining', 'Lord of the rings','Batman begins']
+    const movies=['Superman', 'Spider Man', 'Rang de basanti', 'The shining', 'Lord of the rings','Batman begins']
     res.send(movies)
 });
 
 router.get('/movies/:indexNumber', function (req, res) {
-    const movies=['Rang de basanti', 'The shining', 'Lord of the rings','Batman begins']
-    JSON.stringify(req.params)
+    const movies=['Superman', 'Spider Man','Rang de basanti', 'The shining', 'Lord of the rings','Batman begins']
+    console.log(req.params)
+    //console.log(JSON.stringify(req.params))
     let len = movies.length
-    let item = movies[req.params.indexNumber]
+    let item = movies[req.params.indexNumber - 1]
     if(req.params.indexNumber < len){
         res.send(item)
     }else{
@@ -54,7 +55,19 @@ router.get('/films', function (req, res) {
           {
            id: 4,
            name: "Finding Nemo"
-          }];
+          },
+          {
+           id: 5,
+            name: "Superman"
+          },
+          {
+            id: 6,
+            name: "Spider Man"
+          },
+          {
+            id: 7,
+           name: "Thor: Ragnarock"
+          },];
        
        res.send(film)
 });
@@ -75,16 +88,28 @@ router.get('/film/:filmId', function (req, res) {
        {
         id: 4,
         name: "Finding Nemo"
-       }
-    ]
+       },
+       {
+        id: 5,
+         name: "Superman"
+       },
+       {
+         id: 6,
+         name: "Spider Man"
+       },
+       {
+         id: 7,
+        name: "Thor: Ragnarock"
+       }];
    // console.log(films[0])
-       JSON.stringify(req.params)
-       const len = films.length
-       const item = films[req.params.filmId]
+    //    JSON.stringify(req.params)
+       let len = films.length
+       len++
+       const item = films[req.params.filmId - 1]
        if(req.params.filmId < len){
           res.send(item)
        }else{
-        res.send('Error: There is no movie.')
+        res.send('No movie exists with this id.')
       }
       //res.send("adfdfa")
 });
