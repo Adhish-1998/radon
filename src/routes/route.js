@@ -1,14 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const UserModel= require("../models/userModel.js")
-const UserController= require("../controllers/userController")
 
-router.get("/test-me", function (req, res) {
-    res.send("My first ever api!")
-})
+let players = []
 
-router.post("/createUser", UserController.createUser  )
+router.post('/players', function (req, res) {
+    
+    let newPlayer = req.body
+    let newPlayersName = newPlayer.name
+    let isNameRepeated = false
 
-router.get("/getUsersData", UserController.getUsersData)
+    //let player = players.find(p => p.name == newPlayersName)
+
+    for(let i = 0; i < players.length; i++) {
+        if(players[i].name == newPlayersName) {
+            isNameRepeated = true;
+            break;
+        }
+    }
+
+    //undefined is same as false/ a falsy value
+    if (isNameRepeated) {
+        //Player exists
+        res.send("This player was already added!")
+    } else {
+        //New entry
+        players.push(newPlayer)
+        res.send(players)
+    }
+});
+
 
 module.exports = router;
