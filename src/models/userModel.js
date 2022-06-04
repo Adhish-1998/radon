@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema( {
     mobile: {
         type: String,
         unique: true,
-        required: true
+        //required: true
     },
     emailId: String,
     gender: {
@@ -21,9 +21,11 @@ const userSchema = new mongoose.Schema( {
     //     siblingName: String
     // },
     // cars: [ String  ]
-}, { timestamps: true });
+    }
+ //,{ timestamps: true }
+ );
 
-module.exports = mongoose.model('User', userSchema) //users
+module.exports = mongoose.model('user', userSchema) //users
 
 
 
