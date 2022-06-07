@@ -1,6 +1,8 @@
 const { count } = require("console")
 const BookModel= require("../models/bookModel")
 
+//Creating A New Book
+
 const createBook= async function (req, res) {
     let bookData= req.body
     let savedBook= await BookModel.create(bookData)
@@ -8,11 +10,15 @@ const createBook= async function (req, res) {
 }
 module.exports.createBook= createBook
 
+//Fetch Book with Author and Book Name
+
 const bookList= async function (req, res) {
     let allBooks = await BookModel.find().select({"Book Name" : 1, "Author Name" : 1, _id : 0})
     res.send({BooksWithAuthorName : allBooks})  
 }
 module.exports.bookList = bookList
+
+//Fetch Book According to Year
 
 const getBooksInYear= async function (req, res) {
     let allBooksByYear = await BookModel.find({ "Year" : req.params.bookyear })
@@ -20,6 +26,8 @@ const getBooksInYear= async function (req, res) {
 }
 
 module.exports.getBooksInYear = getBooksInYear
+
+//Fetch Book According to 100, 200, 500 INR
 
 const getXINRBooks= async function (req, res) {
     //const prc = BookModel.Price.IndianPrice
@@ -29,6 +37,8 @@ const getXINRBooks= async function (req, res) {
 
 module.exports.getXINRBooks = getXINRBooks
 
+//Fetch Book According to Given Property
+
 const getParticularBook= async function (req, res) {
     //const prc = BookModel.Price.IndianPrice
     let Properties = req.body
@@ -37,6 +47,9 @@ const getParticularBook= async function (req, res) {
 }
 
 module.exports.getParticularBook = getParticularBook
+
+//Fetch if Stock Available or Total Page is Greater than 500
+
 const getRandomBooks= async function (req, res) {
     let allBooks = await BookModel.find({$or : [{"Stock Availabe" : true} , {"Total Pages" : {$gt: 500}} ]  })
     res.send({msg : allBooks})
