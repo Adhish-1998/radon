@@ -22,8 +22,8 @@ const getBooksInYear= async function (req, res) {
 module.exports.getBooksInYear = getBooksInYear
 
 const getXINRBooks= async function (req, res) {
-    const prc = BookModel.Price.IndianPrice
-    let getBooksByINR = await BookModel.find({prc : { $in : ["INR 100", "INR 200", "INR 500"]} });
+    //const prc = BookModel.Price.IndianPrice
+    let getBooksByINR = await BookModel.find({"Price.Indian Price" : { $or : ["INR 100", "INR 200", "INR 500"]} });
     res.send({msg: getBooksByINR})
 }
 
