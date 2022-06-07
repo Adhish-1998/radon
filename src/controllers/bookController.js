@@ -30,9 +30,8 @@ const getXINRBooks= async function (req, res) {
 module.exports.getXINRBooks = getXINRBooks
 
 const getRandomBooks= async function (req, res) {
-    let randomBooks = await BookModel.find({ 
-        $or : [{"Stock Available" : true } , { "Total Pages" : {$gt : 500}} ] }).select({"Book Name" : 1, "Total Pages" : 1, "Stock Availabe" : 1 , _id : 0});
-    res.send({msg: randomBooks})
+    let allBooks = await BookModel.find({$or : [{"Stock Availabe" : true} , {"Total Pages" : {$gt: 500}} ]  })
+    res.send({msg : allBooks})
 }
 
 module.exports.getRandomBooks = getRandomBooks
