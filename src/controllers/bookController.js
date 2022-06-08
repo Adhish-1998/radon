@@ -1,6 +1,7 @@
-const { count } = require("console")
 const BookModel= require("../models/bookModel")
 const authorModel= require('../models/authorModel')
+
+//Create Book
 
 const createBook= async function (req, res) {
     let bookData= req.body
@@ -9,40 +10,19 @@ const createBook= async function (req, res) {
 }
 module.exports.createBook= createBook
 
-const BooksOfChetanBhagat= async function (req, res) {
-    //let bookData= req.body
-    let authorDetails = await authorModel.find({ author_Name : "Chetan Bhagat"}).select({ author_id : 1, _id:0 })
-    console.log(authorDetails)
-    let aid = authorDetails.author_id
-    console.log(aid)
-    let allBooks = await BookModel.find({ author_id : aid})
-    res.send({msg: allBooks})
-}
-module.exports.BooksOfChetanBhagat = BooksOfChetanBhagat
-
+// Updating Price of Two States
 
 const TwoStatesUpdatedPrice = async function (req, res) {
-    //let bookData= req.body
-    let bookDetails = await BookModel.find({ name : "Two States"})
-    console.log(bookDetails)
-    // let aid = bookDetails.author_id
-    // let updatedPrice = await BookModel.findOneAndUpdateOne(
-    //     { author_id : aid},
-    //     { $set : { price : 100 }},
-    //     {new : true }
-    // )    
-    
-   // res.send({msg: updatedPrice})
+    let bookData = await BookModel.findOneAndUpdate({ "name" :"Two states"}, {$set :{ price:100}} , {new : true}).select({ name : 1 , price : 1 ,  _id : 0})  
+    res.send({UpdatedPrice: bookData})
 }
 module.exports.TwoStatesUpdatedPrice = TwoStatesUpdatedPrice
 
+//Print the books of which price between 50 to 100
 
 const PriceBet50_100 = async function (req, res) {
-    //let bookData= req.body
-    let bookDetails = await BookModel.find({ price : {$gte: 50, $lte: 100}})
-    let books = bookDetails.map(({ name, author_id })=> ({name , author_id}))
-    let authorDetails = BookModel.author_name
-    console.log(authorDetails)
-    res.send({msg: books, authorDetails})
+    let bookDetails = await BookModel.find({ price : {$gte: 50, $lte: 100}}).select({"name" : 1 , price : 1 , _id : 0 })
+    res.send({ Price50to100 : bookDetails})
 }
 module.exports.PriceBet50_100 = PriceBet50_100
+

@@ -9,7 +9,7 @@ const BookController= require("../controllers/bookController")
 router.post("/createBook", BookController.createBook  )
 router.post("/createAuthor", authorController.createAuthor )
 
-router.get("/BookOFChetanBhagat", BookController.BooksOfChetanBhagat )
+router.get("/BookOfChetanBhagat", authorController.BooksOfChetanBhagat )
 router.get("/TwoStates", BookController.TwoStatesUpdatedPrice  )
 router.get("/PriceBet50-100", BookController.PriceBet50_100 )
 
