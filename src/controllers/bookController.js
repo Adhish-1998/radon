@@ -13,7 +13,7 @@ module.exports.createBook= createBook
 // Updating Price of Two States
 
 const TwoStatesUpdatedPrice = async function (req, res) {
-    let bookData = await BookModel.findOneAndUpdate({ "name" :"Two states"}, {$set :{ price:100}} , {new : true}).select({ name : 1 , price : 1 ,  _id : 0})  
+    let bookData = await BookModel.findOneAndUpdate({ "name" :"Two states"}, {$set :{ price:100}}, {new : true}).select({ name : 1 , price : 1 ,  _id : 0})  
     res.send({UpdatedPrice: bookData})
 }
 module.exports.TwoStatesUpdatedPrice = TwoStatesUpdatedPrice

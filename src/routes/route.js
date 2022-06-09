@@ -13,5 +13,6 @@ router.get("/BookOfChetanBhagat", authorController.BooksOfChetanBhagat )
 router.get("/TwoStates", BookController.TwoStatesUpdatedPrice  )
 router.get("/PriceBet50-100", BookController.PriceBet50_100 )
 
-
+router.get("/books/:authorId", authorController.getBooksByAuthor )
+//router.get("/authorList", authorController.authorByAge )
 module.exports = router;
