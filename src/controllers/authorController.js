@@ -18,6 +18,8 @@ const createPublisher= async function (req, res) {
     let publisherCreated = await publisherModel.create(publisher)
     res.send({data: publisherCreated})
 }
+
+
 module.exports.createPublisher= createPublisher
 module.exports.createAuthor= createAuthor
 module.exports.getAuthorsData= getAuthorsData
