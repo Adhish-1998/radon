@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { rawListeners } = require("../models/userModel");
 const userModel = require("../models/userModel");
 
 
@@ -54,13 +55,11 @@ const updateUser = async function (req, res) {
   if (!user) {
     return res.send("No such user exists");
   }
-  let userData = req.body;
-  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
+  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, {$set : {age : req.body.age}});
   res.send({ status: updatedUser, data: updatedUser });
 };
 
 module.exports.updateUser = updateUser;
-
 
 //It will show deleted but the data will exist in Database
 const deleteUser = async function (req, res){
@@ -70,7 +69,7 @@ const deleteUser = async function (req, res){
   if (!user) {
     return res.send("No such user exists");
   }
-   let data2 = await userModel.findOneAndUpdate({ _id: userId }, {$set: {isDeleted : true}})
+  await userModel.findOneAndUpdate({ _id: userId }, {$set: {isDeleted : true}})
   res.send("Your Data is Deleted")
 }
 

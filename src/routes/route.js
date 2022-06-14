@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userController= require("../controllers/userController")
-const commonMW = require('../middleware/commonMW')
+const commonMW = require('../middleware/author')
 
 //Registering A User
 router.post("/users", userController.createUser  )
@@ -10,7 +10,7 @@ router.post("/users", userController.createUser  )
 router.post("/login", userController.loginUser)
 
 //Fetch User Details
-router.get("/users/:userId", commonMW.Authenticity, userController.getUserData)\
+router.get("/users/:userId", commonMW.Authenticity, userController.getUserData)
 
 //Update User Details
 router.put("/users/:userId", commonMW.Authenticity, userController.updateUser)
