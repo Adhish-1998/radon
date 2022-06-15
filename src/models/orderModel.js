@@ -10,11 +10,14 @@ const orderSchema = new mongoose.Schema( {
         type: ObjectId,
         ref:"product"
     },
-	amount: Number,
+	amount: {
+        type: Number,
+        default: 0
+    },
 	isFreeAppUser: Boolean, 
 	date: String
 
 }, { timestamps: true });
 
 
-module.exports = mongoose.model('Order', bookSchema) //orders
+module.exports = mongoose.model('Order', orderSchema) //orders

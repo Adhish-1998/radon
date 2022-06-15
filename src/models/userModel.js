@@ -9,8 +9,14 @@ const userSchema = new mongoose.Schema( {
 
 	address: String,
 	age: Number,
- 	gender: ["male","femele", "other"],
-	isFreeAppUser: Boolean  //(Default false value)
+ 	gender: {
+		type: String,
+		enum: ["male","female", "other"]
+	},
+	isFreeAppUser: {
+		type : Boolean,
+		default: false
+	}  //(Default false value)
 }
 , { timestamps: true });
 
