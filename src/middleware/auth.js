@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-
+let decodedToken
 
 const authenticate = function(req, res, next) {
     let token = req.headers["x-Auth-token"];
@@ -12,9 +12,6 @@ const authenticate = function(req, res, next) {
 
 
 const authorise = function(req, res, next) {
-    let token = req.headers["x-Auth-token"];
-    if(!token) token = req.headers["x-auth-token"];
-    let decodedToken = jwt.verify(token, "functionup-radon");
     let userToBeModified = req.params.userId
     let userLoggedIn = decodedToken.userId
     if(userToBeModified != userLoggedIn) return res.send({status : false, msg: 'You are not Authorised'})
