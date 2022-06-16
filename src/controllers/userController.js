@@ -4,12 +4,14 @@ const userModel = require("../models/userModel");
 const createUser = async function (req, res) {
   try{
   let data = req.body;
-  let savedData = await userModel.create(data);
-  res.status(201).send({ msg: savedData });
-  }
-  catch(error){
+  if(Object.keys.apply(data).length !=0){
+    let savedData = await userModel.create(data);
+    res.status(201).send({msg: savedData})
+  }else res.status(400).send({msg : "Bad Request"}) 
+}
+catch(error){
     res.status(500).send({ msg : "Error" })
-  }
+ }
 };
 
 const loginUser = async function (req, res) {
