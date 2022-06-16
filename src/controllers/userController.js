@@ -8,7 +8,7 @@ const createUser = async function (req, res) {
   res.status(201).send({ msg: savedData });
   }
   catch(error){
-    res.status(400).send({ msg : "Error" })
+    res.status(500).send({ msg : "Error" })
   }
 };
 
@@ -35,7 +35,7 @@ const loginUser = async function (req, res) {
   );
   res.status(200).send({ status: true, data: token });
 }catch(error){
-  res.status(401).send({Msg : "Error"})
+  res.status(500).send({Msg : "Error"})
 }
 };
 
@@ -47,7 +47,7 @@ const getUserData = async function (req, res) {
 
   res.status(200).send({ status: true, data: userDetails });
 }catch(error){
-  res.status(403).send({Msg : "Error"})
+  res.status(500).send({Msg : "Error"})
 }
 };
 
@@ -63,7 +63,7 @@ const updateUser = async function (req, res) {
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
   res.status(200).send({ status: updatedUser, data: updatedUser });
  }catch(error){
-  res.status(403).send({Msg : "Error"})
+  res.status(500).send({Msg : "Error"})
 }
 };
 
@@ -81,7 +81,7 @@ const postMessage = async function (req, res) {
     //return the updated user document
     return res.status(200).send({status: true, data: updatedUser})
     }catch(error){ 
-    res.status(403).send({Msg : "Error"})
+    res.status(500).send({Msg : "Error"})
    }
 }
 
@@ -95,7 +95,7 @@ const deleteUser = async function (req, res){
   await userModel.findOneAndUpdate({ _id: userId }, {$set: {isDeleted : true}}, {new : true})
   res.send({msg : "Your Data is Deleted"})
   }catch(error){
-  res.status(403).send({Msg : "Error"})
+  res.status(500).send({Msg : "Error"})
 }
 }
 

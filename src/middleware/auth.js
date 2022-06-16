@@ -10,7 +10,7 @@ const authenticate = function(req, res, next) {
     if(!decodedToken) return res.status(500).send({ status: false, msg: "token is invalid" });
     next()
     }catch(error){
-        res.send({Msg : "Error"})
+        res.status(500).send({Msg : error.message})
     }
 }
 
@@ -22,7 +22,7 @@ const authorise = function(req, res, next) {
     if(userToBeModified != userLoggedIn) return res.status(401).send({status : false, msg: 'Unauthorized Access'})
     next()
     }catch(error){
-    res.send({Msg : "Error"})
+    res.status(500).send({Msg : "Error"})
 } 
 }
 
