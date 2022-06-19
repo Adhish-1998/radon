@@ -1,30 +1,4 @@
 const axios = require('axios')
-const UserModel= require("../models/userModel")
-
-
-
-
-const basicCode= async function(req, res) {
-    let tokenDataInHeaders= req.headers.token
-    console.log(tokenDataInHeaders)
-
-    console.log( "HEADER DATA ABOVE")
-    console.log( "hey man, congrats you have reached the Handler")
-    res.send({ msg: "This is coming from controller (handler)"})
-    }
-
-
-const createUser= async function (req, res) {
-    let data= req.body
-    let savedData= await UserModel.create(data)
-    res.send({msg: savedData})
-}
-
-const getUsersData= async function (req, res) {
-    let allUsers= await UserModel.find()
-    res.send({msg: allUsers})
-}
-
 
 
 let createMeme = async function (req, res) {
@@ -51,8 +25,31 @@ let createMeme = async function (req, res) {
   }
 }
 
-
-module.exports.createUser= createUser
-module.exports.getUsersData= getUsersData
-module.exports.basicCode= basicCode
 module.exports.createMeme= createMeme
+
+
+let weatherOfCity = async function (req, res) {
+    try {
+        let cities =  ["Bengaluru","Mumbai", "Delhi", "Kolkata", "Chennai", "London", "Moscow"]
+        let cityTemps = []
+        for( let city of cities){
+        //console.log(`query params are: ${districtId} ${date}`)
+        var options = {
+            method: "get",
+            url: `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5ae280226f51017d42d9a5d3f8f437bc`
+        }
+         let result = await axios(options)
+         cityTemps.push({City : city, Temperature : result.data.main.temp})
+        }
+     
+        //console.log(result.data)
+        cityTemps = cityTemps.sort(function(a,b){ return a.Temperature - b.Temperature})
+        res.status(200).send({ msg: cityTemps })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).send({ msg: err.message })
+    }
+}
+
+module.exports.weatherOfCity = weatherOfCity
