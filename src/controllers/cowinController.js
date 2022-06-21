@@ -80,6 +80,7 @@ let getSessionByDistrict = async function (req, res) {
         console.log(err)
         res.status(500).send({ msg: err.message })
     }
+    console.log("End Line")
 }
 
 module.exports.getSessionByDistrict = getSessionByDistrict
