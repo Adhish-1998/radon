@@ -7,6 +7,7 @@ const valid = require("../validation/validation")
 
 const college = async function (req, res) {
   try {
+    res.setHeader("Access-Control-Allow-Origin", "*")
     let collegeData = req.body;
     let {name, fullName, logoLink} = req.body
 
@@ -79,6 +80,7 @@ const college = async function (req, res) {
 
 const getColleges = async function (req, res) {
   try {
+    res.setHeader("Access-Control-Allow-Origin", "*")
     let college = req.query.collegeName;
     if (Object.keys(req.query).length == 0) {
       return res
@@ -122,7 +124,7 @@ const getColleges = async function (req, res) {
       interns: interns,
     };
 
-    return res.status(200).send({ status: true, Data: internDetails });
+    return res.status(200).send({ status: true, data: internDetails });
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });
   }

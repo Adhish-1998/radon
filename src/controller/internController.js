@@ -6,6 +6,7 @@ const { ConnectionStates } = require("mongoose");
 
 const intern = async function (req, res) {
   try {
+    res.setHeader("Access-Control-Allow-Origin", "*")
     let internData = req.body;
     let { name, email, mobile, collegeName } = req.body
 
