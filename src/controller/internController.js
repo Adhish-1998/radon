@@ -105,7 +105,7 @@ const intern = async function (req, res) {
     internData.name = name.replace(/\s+/g, " ");
      
     let result = await internModel.create(internData);
-    res.status(201).send({ status: true, Data: result });
+    res.status(201).send({ status: true, data: result });
   } catch (err) {
     res.status(500).send({ status: false, msg: err.message });
   }
