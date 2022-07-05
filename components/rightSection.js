@@ -74,7 +74,7 @@ export default function RightSection({
     const [isLoading, setIsLoading] = useState(false)
 
     const {
-        interns:interests,
+        interns:interns,
         name:collegeName,
         fullName
     } = collegeDetails
@@ -246,14 +246,14 @@ export default function RightSection({
 
             <Spacer height={'2.5rem'} />
 
-            {internIntention === 1 && Array.isArray(interests) && !!interests.length && (
+            {internIntention === 1 && Array.isArray(interns) && !!interns.length && (
                 <div className={sectionStyles.interestContainer} >
                     <div className={sectionStyles.interestRow} key={0}>
                         <span className={sectionStyles.rowItemHeading} style={{flex:.75}} >S. no</span>
                         <span className={sectionStyles.rowItemHeading} style={{flex:1}}>Intern Name</span>
                         <span className={sectionStyles.rowItemHeading} style={{flex:1 }}>Email Address</span>
                     </div>
-                    {interests.map((interest, index) => (
+                    {interns.map((interest, index) => (
                         <div className={sectionStyles.interestRow} key={interest._id}>
                             <span style={{flex:.75, fontSize:'.87rem', fontWeight:'700'}} >{`${index+1}. `}</span>
                             <span style={{flex:1, fontSize:'.87rem', fontWeight:'700'}}>{interest.name}</span>
